@@ -7,7 +7,7 @@ on:
 
 env:
   CI: true
-  APP_IMAGE_NAME: AslanFazyltegi/devops-for-programmers-project-74
+  APP_IMAGE_NAME: afazyltegi/devops-for-programmers-project-74
   
 jobs:
   build:
