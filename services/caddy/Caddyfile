@@ -1,0 +1,28 @@
+# Обработка запросов по домену с HTTPS
+hexlet.local {
+    log {
+        output stdout
+        format console
+    }
+
+    encode gzip zstd
+
+    # Проксирование всех запросов на контейнер app
+    reverse_proxy app:8080
+
+    # Включение автоматического HTTPS с использованием самоподписанного сертификата для домена
+    tls internal
+}
+
+# Обработка запросов по IP с использованием HTTP
+192.168.100.108 {
+    log {
+        output stdout
+        format console
+    }
+
+    encode gzip zstd
+
+    # Проксирование всех запросов на контейнер app
+    reverse_proxy app:8080
+}

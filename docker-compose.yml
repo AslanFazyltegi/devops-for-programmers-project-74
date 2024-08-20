@@ -5,8 +5,10 @@ services:
     image: afazyltegi/devops-for-programmers-project-74:latest
     build:
       context: .
+    depends_on:
+      - db
 #      dockerfile: Dockerfile
-      dockerfile: ${DOCKERFILE:-Dockerfile}
+#      dockerfile: ${DOCKERFILE:-Dockerfile}
 #    working_dir: /app
 #    volumes:
 #      - ./app:/app
@@ -14,3 +16,22 @@ services:
 #      - "8080:8080"
 #    command: make dev
 #    command: ${COMMAND:-make dev}
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
