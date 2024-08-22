@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:8080"
 #    command: make dev
-    command: ${COMMAND:-make dev}
+#    command: ${COMMAND:-make dev}
 #  caddy:
 #    image: caddy:latest
 #    restart: unless-stopped
