@@ -1,0 +1,22 @@
+{
+    # Указываем путь к хранению сертификатов
+    # storage file_system {
+    #     root /data/caddy
+    # }
+}
+
+:80, :443 {
+    log {
+        output stdout
+        format console
+    }
+
+    # Компрессия
+    encode gzip zstd
+
+    # Самоподписной сертификат
+    tls internal
+
+    # Проксирование всех запросов на контейнер app
+    reverse_proxy app:8080
+}

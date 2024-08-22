@@ -3,8 +3,30 @@ version: '3.8'
 services:
   app:
     volumes:
-      - ./app:/app
+      - ./:/app
     ports:
       - "8080:8080"
-#    command: make dev
+    command: make dev
 #    command: ${COMMAND:-make dev}
+#  caddy:
+#    image: caddy:latest
+#    restart: unless-stopped
+#    cap_add:
+#      - NET_ADMIN
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#      - "443:443/udp"
+#    volumes:
+#      - ./services/caddy/Caddyfile:/etc/caddy/Caddyfile
+#      - ./:/app
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./services/caddy/Caddyfile:/etc/caddy/Caddyfile
