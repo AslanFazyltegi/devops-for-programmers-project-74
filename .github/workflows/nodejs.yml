@@ -21,6 +21,14 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'npm'
+
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
+          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+
       - run: make setup
       - run: make lint
       - run: make test
