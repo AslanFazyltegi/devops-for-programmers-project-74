@@ -1,0 +1,10 @@
+localhost, hexlet.local, 192.168.100.108 {
+  log {
+    format json
+  }
+
+  encode zstd
+  tls internal
+
+  reverse_proxy /* app:8080
+}
