@@ -4,6 +4,6 @@ services:
   app:
     build:
       context: .
-    volumes:
-      - ./app/:/app
+      dockerfile: Dockerfile.production
+    image: afazyltegi/devops-for-programmers-project-74
     command: ["make", "test"]
